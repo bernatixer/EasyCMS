@@ -1,0 +1,2 @@
+# EasyCMS
+CMS made easy
