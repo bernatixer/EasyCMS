@@ -1,0 +1,25 @@
+{
+  "name": "easycms",
+  "version": "1.0.0",
+  "description": "EasyCMS, a web content managing system for everyone. Easy to use and deply.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bernatixer/EasyCMS.git"
+  },
+  "keywords": [
+    "CMS"
+  ],
+  "author": "Bernat Torres (bernatixer), David Sirera (Dasix)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bernatixer/EasyCMS/issues"
+  },
+  "homepage": "https://github.com/bernatixer/EasyCMS#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
