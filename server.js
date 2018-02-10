@@ -1,8 +1,23 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-app.use(express.static('public'))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
-app.get('/', (req, res) => res.sendFile('index.html'))
+app.use(express.static('public'));
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.get('/', function(req, res) {
+	res.sendFile('/index.html');
+});
+
+app.post('/save-my-page', function(req, res) {
+	console.log(req.body);
+	res.send('200');
+});
+
+app.listen(3000, function() {
+	console.log('Example app listening on port 3000!')
+});
