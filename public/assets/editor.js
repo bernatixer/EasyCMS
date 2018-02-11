@@ -2,7 +2,21 @@ window.addEventListener('load', function() {
     var editor;
 
     editor = ContentTools.EditorApp.get();
-    editor.init('*[data-editable]', 'data-name');
+    editor.init('*[data-editable]', 'data-name', null, true);
+
+    //Right Click
+
+    if (document.addEventListener) { // IE >= 9; other browsers
+        document.addEventListener('contextmenu', function(e) {
+            openToolbox();
+            e.preventDefault();
+        }, false);
+    } else { // IE < 9
+        document.attachEvent('oncontextmenu', function() {
+            openToolbox();
+            window.event.returnValue = false;
+        });
+    }
 
     editor.addEventListener('saved', function (ev) {
         var name, payload, regions, xhr;
@@ -29,5 +43,16 @@ window.addEventListener('load', function() {
 			else new ContentTools.FlashUI('no');
 		});
     });
+
+    function openToolbox(){
+        console.log("open Toolbox");
+        
+        editor.ignition().edit();
+        editor.toolbox().show();
+        editor.inspector().hide();    
+    }
 });
+
+
+
 
