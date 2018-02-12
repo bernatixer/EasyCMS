@@ -34,11 +34,10 @@ window.addEventListener('load', function() {
         for (name in regions) {
             if (regions.hasOwnProperty(name)) {
 				payload[name] = regions[name];
-                // payload.push({[name]: regions[name]});
             }
         }
-		console.log(payload);
-		$.post( "/save-my-page", JSON.stringify(payload), function( data ) {
+		
+		$.post( "/save-my-page", payload, function( data ) {
 			editor.busy(false);
 			if (data == "200") new ContentTools.FlashUI('ok');
 			else new ContentTools.FlashUI('no');
