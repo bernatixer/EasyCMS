@@ -45,8 +45,7 @@ window.addEventListener('load', function() {
     });
 
     function openToolbox(){
-        console.log("open Toolbox");
-
+		
         editor.toolbox().tools([
             [
                 'bold',
@@ -60,7 +59,6 @@ window.addEventListener('load', function() {
 
         editor.toolbox().updateTools();
         
-
         if(editor.isReady()){
             editor.start();        
             editor.inspector().hide();
