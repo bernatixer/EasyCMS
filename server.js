@@ -15,6 +15,9 @@ app.get('/', function(req, res) {
 
 app.post('/save-my-page', function(req, res) {
 	console.log(req.body);
+	for (obj in req.body) {
+		console.log(obj);
+	}
 	res.send('200');
 });
 

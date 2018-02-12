@@ -30,18 +30,19 @@ window.addEventListener('load', function() {
         // Set the editor as busy while we save our changes
         this.busy(true);
 		
-        payload = [];
+        payload = {};
         for (name in regions) {
             if (regions.hasOwnProperty(name)) {
-                payload.push({name: regions[name]});
+				payload[name] = regions[name];
+                // payload.push({[name]: regions[name]});
             }
         }
-    
-		$.post( "/save-my-page", payload, function( data ) {
+		console.log(payload);
+		$.post( "/save-my-page", JSON.stringify(payload), function( data ) {
 			editor.busy(false);
 			if (data == "200") new ContentTools.FlashUI('ok');
 			else new ContentTools.FlashUI('no');
-		});
+		}, "json");
     });
 
     function openToolbox(){
@@ -52,7 +53,3 @@ window.addEventListener('load', function() {
         editor.inspector().hide();    
     }
 });
-
-
-
-
