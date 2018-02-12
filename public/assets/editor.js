@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
     var editor;
 
     editor = ContentTools.EditorApp.get();
-    editor.init('*[data-editable]', 'data-name', null, true);
+    editor.init('*[data-editable]', 'data-name', null, false);
 
     //Right Click
 
@@ -46,9 +46,27 @@ window.addEventListener('load', function() {
 
     function openToolbox(){
         console.log("open Toolbox");
+
+        editor.toolbox().tools([
+            [
+                'bold',
+                'italic',
+                'link',
+                'align-left',
+                'align-center',
+                'align-right'
+            ]
+        ]);
+
+        editor.toolbox().updateTools();
         
-        editor.ignition().edit();
-        editor.toolbox().show();
-        editor.inspector().hide();    
+
+        if(editor.isReady()){
+            editor.start();        
+            editor.inspector().hide();
+        }else if(editor.isEditing()){
+            editor.stop(true);
+        }
+          
     }
 });

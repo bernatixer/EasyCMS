@@ -6419,7 +6419,8 @@
       this._domToolGroups = this.constructor.createDiv(['ct-tool-groups']);
       this._domElement.appendChild(this._domToolGroups);
       this.tools(this._tools);
-      restore = window.localStorage.getItem('ct-toolbox-position');
+      restore = window.localStorage.getItem('ct-toolbox-position');      
+
       if (restore && /^\d+,\d+$/.test(restore)) {
         position = (function() {
           var _i, _len, _ref, _results;
