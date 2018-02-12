@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/bernatixer/EasyCMS#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jsdom": "^11.6.2"
   }
