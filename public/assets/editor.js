@@ -53,7 +53,10 @@ window.addEventListener('load', function() {
                 'link',
                 'align-left',
                 'align-center',
-                'align-right'
+                'align-right',
+				'table',
+				'undo',
+				'redo'
             ]
         ]);
 
