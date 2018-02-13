@@ -24,8 +24,6 @@
     </style>
   </head>
   <body>
-    <script src="assets/content-tools.js"></script>
-    <script src="assets/editor.js"></script>
     <section class="hero is-fullheight is-default is-bold">
       <div class="hero-head">
         <nav class="navbar" id="toolbar" role="navigation" aria-label="main navigation">
@@ -51,8 +49,8 @@
               </a>
               <span class="navbar-burger burger" data-target="navbarMenu">
 				<span></span>
-				<span></span>
-				<span></span>
+              <span></span>
+              <span></span>
               </span>
             </div>
             <div id="navbarMenu" class="navbar-menu">
@@ -78,30 +76,11 @@
         </nav>
       </div>
       <div class="hero-body">
-        <div class="container has-text-centered">
-          <div data-editable="" data-name="header" class="columns is-vcentered">
-            <div class="column is-5">
-              <figure class="image is-4by3">
-                <img src="http://placehold.it/800x600" alt="Description">
-              </figure>
-            </div>
-            <div class="column is-6 is-offset-1">
-              <h1 class="title is-2">
-                EasyCMS
-              </h1>
-              <h2 class="subtitle is-4">
-                Create awesome websites with EasyCMS
-              </h2>
-              <br>
-              <p class="has-text-centered">
-                <a class="button is-medium is-info is-outlined">
-                  Create yours
-                </a>
-              </p>
-            </div>
-            <p>
-            </p>
-          </div>
+        <div data-editable="" data-name="header" class="container">
+          <img alt="Click and hold the image to drag" class="align-left" height="405" src="http://placehold.it/800x600" width="405">
+          <h3 class="has-text-centered" id="drag-and-place-content">
+            Other than typing, there are two ways to add new content to the page; pressing the return key while editing a section of text (except pre-formatted text) or using one of the tools in the toolbox, for example to insert an image, video, table, e
+          </h3>
         </div>
       </div>
       <div class="hero-foot">
@@ -116,5 +95,7 @@
         </div>
       </div>
     </section>
+    <script src="assets/content-tools.js"></script>
+    <script src="assets/editor.js"></script>
   </body>
 </html>
