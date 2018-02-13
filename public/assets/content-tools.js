@@ -9924,7 +9924,7 @@
 
     AlignLeft.icon = 'align-left';
 
-    AlignLeft.className = 'text-left';
+    AlignLeft.className = 'has-text-left';
 
     AlignLeft.canApply = function(element, selection) {
       return element.content !== void 0;
@@ -9986,7 +9986,7 @@
 
     AlignCenter.icon = 'align-center';
 
-    AlignCenter.className = 'text-center';
+    AlignCenter.className = 'has-text-centered';
 
     return AlignCenter;
 
@@ -10005,7 +10005,7 @@
 
     AlignRight.icon = 'align-right';
 
-    AlignRight.className = 'text-right';
+    AlignRight.className = 'has-text-right';
 
     return AlignRight;
 
