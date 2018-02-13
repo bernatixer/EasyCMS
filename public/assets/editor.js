@@ -5,7 +5,6 @@ window.addEventListener('load', function() {
     editor.init('*[data-editable]', 'data-name', null, false);
 
     //Right Click
-
     if (document.addEventListener) { // IE >= 9; other browsers
         document.addEventListener('contextmenu', function(e) {
             openToolbox();
@@ -42,25 +41,19 @@ window.addEventListener('load', function() {
 			if (data == "200") new ContentTools.FlashUI('ok');
 			else new ContentTools.FlashUI('no');
 		}, "json");
-    });
+    }); 
+    
+      document.getElementById("setBold").addEventListener("click",function(){
+        var element = ContentEdit.Root.get().focused();
+        var selection = ContentSelect.Range.query(element);
+        console.log("Set Fake Bold");
+        console.log(element);
+        console.log(selection);
+        //tool = new ContentTools.ToolUI('bold');
+        //tool.apply(node,selection);
+      });
 
     function openToolbox(){
-		
-        /*editor.toolbox().tools([
-            [
-                'bold',
-                'italic',
-                'link',
-                'align-left',
-                'align-center',
-                'align-right',
-				'table',
-				'undo',
-				'redo'
-            ]
-        ]);
-
-        editor.toolbox().updateTools();*/
         
         if(editor.isReady()){
             editor.start();        

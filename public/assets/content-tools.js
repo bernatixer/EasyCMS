@@ -9482,6 +9482,11 @@
         'element': element,
         'selection': selection
       };
+
+      console.log("Set True Bold");
+      console.log(element);
+      console.log(selection);
+
       if (!this.dispatchEditorEvent('tool-apply', toolDetail)) {
         return;
       }

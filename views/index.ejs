@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" integrity="sha256-HEtF7HLJZSC3Le1HcsWbz1hDYFPZCqDhZa9QsCgVUdw=" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/content-tools.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/editor.css">
     <style type="text/css">
       html,
       body {
@@ -34,6 +35,9 @@
             <a class="navbar-item">
               <strong>NEW PAGE</strong>
             </a>
+            <a class="navbar-item" id="setBold">
+              <strong>BOLD</strong>
+            </a>
             <button class="button navbar-burger">
               <span></span>
               <span></span>
@@ -48,12 +52,12 @@
                 <strong>EasyCMS</strong>
               </a>
               <span class="navbar-burger burger" data-target="navbarMenu">
-				<span></span>
+                <span></span>
               <span></span>
               <span></span>
               </span>
             </div>
-            <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-menu" id="navbarMenu">
               <div class="navbar-end">
                 <a class="navbar-item is-active">
                   Home
@@ -72,15 +76,22 @@
                 </a>
               </div>
             </div>
+            <p>
+            </p>
           </div>
         </nav>
       </div>
       <div class="hero-body">
         <div data-editable="" data-name="header" class="container">
-          <img alt="Click and hold the image to drag" class="align-left" height="405" src="http://placehold.it/800x600" width="405">
           <h3 class="has-text-centered" id="drag-and-place-content">
-            Other than typing, there are two ways to add new content to the page; pressing the return key while editing a section of text (except pre-formatted text) or using one of the tools in the toolbox, for example to insert an image, video, table, e
+            Other than typing, there are two ways to add new
+            <b>content</b> to the
+            <b>page</b>;
+            <b>pressing</b> the
+            <b>return</b> key while editing a section of text (except pre-formatted text) or
+            <b>using</b> one of the tools in the toolbox, for example to insert an image, video, table, e
           </h3>
+          <img alt="Click and hold the image to drag" height="405" src="http://placehold.it/800x600" width="405">
         </div>
       </div>
       <div class="hero-foot">
