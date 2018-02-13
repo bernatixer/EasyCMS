@@ -46,7 +46,7 @@ window.addEventListener('load', function() {
 
     function openToolbox(){
 		
-        editor.toolbox().tools([
+        /*editor.toolbox().tools([
             [
                 'bold',
                 'italic',
@@ -60,7 +60,7 @@ window.addEventListener('load', function() {
             ]
         ]);
 
-        editor.toolbox().updateTools();
+        editor.toolbox().updateTools();*/
         
         if(editor.isReady()){
             editor.start();        

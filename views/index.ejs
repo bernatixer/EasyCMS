@@ -1,91 +1,120 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EasyCMS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script src="jquery-3.3.1.min.js"></script>
-    <script defer="" src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" integrity="sha256-HEtF7HLJZSC3Le1HcsWbz1hDYFPZCqDhZa9QsCgVUdw=" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/content-tools.min.css">
-    <style>
-      .navbar {
+    <style type="text/css">
+      html,
+      body {
+        font-family: 'Work Sans', sans-serif;
+      }
+      #toolbar {
         background-color: coral;
+      }
+      #navbar {
+        background-color: #03A9F4;
       }
     </style>
   </head>
   <body>
     <script src="assets/content-tools.js"></script>
     <script src="assets/editor.js"></script>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <strong>PUBLISH</strong>
-        </a>
-        <button class="button navbar-burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <section class="hero is-fullheight is-default is-bold">
+      <div class="hero-head">
+        <nav class="navbar" id="toolbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <strong>PUBLISH</strong>
+            </a>
+            <a class="navbar-item">
+              <strong>NEW PAGE</strong>
+            </a>
+            <button class="button navbar-burger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </nav>
+        <nav class="navbar">
+          <div data-editable="" data-name="nav" class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="#">
+                <strong>EasyCMS</strong>
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenu">
+				<span></span>
+				<span></span>
+				<span></span>
+              </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item is-active">
+                  Home
+                </a>
+                <a class="navbar-item">
+                  Examples
+                </a>
+                <a class="navbar-item">
+                  Features
+                </a>
+                <a class="navbar-item">
+                  Team
+                </a>
+                <a class="navbar-item">
+                  Help
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
-    </nav>
-    <section class="section">
-      <div data-editable="" data-name="header" class="container">
-        <h1 class="title" id="title">
-          EasCMS
-        </h1>
-        <p class="subtitle">
-          Create your
-          <i>awesome</i> website with <strong>EasyCMS</strong>!
-        </p>
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div data-editable="" data-name="header" class="columns is-vcentered">
+            <div class="column is-5">
+              <figure class="image is-4by3">
+                <img src="http://placehold.it/800x600" alt="Description">
+              </figure>
+            </div>
+            <div class="column is-6 is-offset-1">
+              <h1 class="title is-2">
+                EasyCMS
+              </h1>
+              <h2 class="subtitle is-4">
+                Create awesome websites with EasyCMS
+              </h2>
+              <br>
+              <p class="has-text-centered">
+                <a class="button is-medium is-info is-outlined">
+                  Create yours
+                </a>
+              </p>
+            </div>
+            <p>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <div data-editable="" data-name="footer" class="container">
+          <div class="tabs is-centered">
+            <ul>
+              <li>
+                <a>I'm a footer! Change me!</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-    <div data-editable="" data-name="main-text" class="container">
-      <p>
-        Lorem
-        <i>ipsum</i> dolor sit amet, consectetur adipiscing elit. Cras faucibus ante a libero hendrerit imperdiet. Etiam eu malesuada ex, quis hendrerit odio. Quisque venenatis, lorem ut tincidunt accumsan, turpis neque fermentum augue, at auctor diam mi
-        in dolor. Aenean et
-      </p>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              hola
-            </th>
-            <th>
-              dw
-            </th>
-            <th>
-              d
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              dw
-            </td>
-            <td>
-              d
-            </td>
-            <td>
-              d
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>
-              wd
-            </td>
-            <td>
-              dw
-            </td>
-            <td>
-              wd ola
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
   </body>
 </html>

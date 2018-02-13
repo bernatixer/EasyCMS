@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const jsdom = require('jsdom');
 const fs = require('fs');
 const pretty = require('pretty');
 
@@ -17,6 +16,7 @@ app.use(express.static('public'));
 app.get('/', function(req, res) {
 	res.render('index');
 });
+
 app.get('*', function(req, res) {
 	res.render('404');
 });
@@ -35,7 +35,7 @@ app.post('/save-my-page', function(req, res) {
 			$('div[data-name="'+obj+'"]').html(req.body[obj]);
 		}
 		
-		var newHTML = pretty("<html>\n" + $("html").html() + "\n</html>", {ocd: true});
+		var newHTML = pretty("<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", {ocd: true});
 		fs.writeFile("views/index.ejs", newHTML, function(err) {
 			if(err) {
 				res.send('500');
