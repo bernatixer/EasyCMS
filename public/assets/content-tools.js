@@ -6709,6 +6709,7 @@
 
     ToolUI.prototype.apply = function(element, selection) {
       var callback, detail;
+
       if (!this.tool.canApply(element, selection)) {
         return;
       }
@@ -6723,6 +6724,7 @@
           }
         };
       })(this);
+
       if (this.dispatchEvent(this.createEvent('apply', detail))) {
         return this.tool.apply(element, selection, callback);
       }
@@ -9482,10 +9484,6 @@
         'element': element,
         'selection': selection
       };
-
-      console.log("Set True Bold");
-      console.log(element);
-      console.log(selection);
 
       if (!this.dispatchEditorEvent('tool-apply', toolDetail)) {
         return;

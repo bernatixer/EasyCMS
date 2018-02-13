@@ -43,15 +43,20 @@ window.addEventListener('load', function() {
 		}, "json");
     }); 
     
-      document.getElementById("setBold").addEventListener("click",function(){
+      document.getElementById("setBold").onmousedown = function(e){
+
+        e = e || window.event
+        e.preventDefault();
+
         var element = ContentEdit.Root.get().focused();
-        var selection = ContentSelect.Range.query(element);
-        console.log("Set Fake Bold");
-        console.log(element);
-        console.log(selection);
-        //tool = new ContentTools.ToolUI('bold');
-        //tool.apply(node,selection);
-      });
+        var domElement = window.getSelection().anchorNode.parentElement;
+
+        ContentSelect.Range.prepareElement(domElement);
+        selection = ContentSelect.Range.query(domElement);
+        
+        var bold = ContentTools.ToolShelf.fetch("bold");
+        bold.apply(element,selection,function(){});
+      }
 
     function openToolbox(){
         
