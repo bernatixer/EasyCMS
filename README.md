@@ -4,4 +4,4 @@ CMS made easy
 ## TO-DO
 
  - Post images and upload them to Cloudinary (http://getcontenttools.com/tutorials/image-uploads-with-cloudinary)
- - Check XSS threats
+ - Check XSS threats, also don't let them insert EJS code
