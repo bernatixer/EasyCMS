@@ -41,22 +41,7 @@ window.addEventListener('load', function() {
 			if (data == "200") new ContentTools.FlashUI('ok');
 			else new ContentTools.FlashUI('no');
 		}, "json");
-    }); 
-    
-      document.getElementById("setBold").onmousedown = function(e){
-
-        e = e || window.event
-        e.preventDefault();
-
-        var element = ContentEdit.Root.get().focused();
-        var domElement = window.getSelection().anchorNode.parentElement;
-
-        ContentSelect.Range.prepareElement(domElement);
-        selection = ContentSelect.Range.query(domElement);
-        
-        var bold = ContentTools.ToolShelf.fetch("bold");
-        bold.apply(element,selection,function(){});
-      }
+    });
 
     function openToolbox(){
         
@@ -69,3 +54,24 @@ window.addEventListener('load', function() {
           
     }
 });
+
+window.onload = function(){
+    var customTools = document.getElementsByClassName("custom-tool");
+    for (var elem of customTools)  {
+        elem.onmousedown = function(e){
+
+            e = e || window.event
+            e.preventDefault();
+    
+            var element = ContentEdit.Root.get().focused();
+            var domElement = window.getSelection().anchorNode.parentElement;
+    
+            ContentSelect.Range.prepareElement(domElement);
+            selection = ContentSelect.Range.query(domElement);
+            
+            var bold = ContentTools.ToolShelf.fetch(this.id);
+            bold.apply(element,selection,function(){});
+        }
+    };
+
+}
