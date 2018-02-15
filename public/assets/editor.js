@@ -35,12 +35,12 @@ window.addEventListener('load', function() {
 				payload[name] = regions[name];
             }
         }
-		
+
 		$.post( "/save-my-page", payload, function( data ) {
-			editor.busy(false);
-			if (data == "200") new ContentTools.FlashUI('ok');
-			else new ContentTools.FlashUI('no');
-		}, "json");
+            editor.busy(false);
+            if (data == "ok") new ContentTools.FlashUI('ok');
+            else new ContentTools.FlashUI('no');
+        });
     });
 
     function openToolbox(){

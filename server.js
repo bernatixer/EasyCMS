@@ -69,8 +69,11 @@ app.post('/save-my-page', function(req, res) {
 		
 		var newHTML = pretty("<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", {ocd: true});
 		fs.writeFile("views/index.ejs", newHTML, function(err) {
-			if (err) res.sendStatus(500);
-			else res.sendStatus(200);
+			if (err) {
+				res.send("error");
+				return console.log(err);
+			}
+			res.send("ok");
 		});
 	});
 });
