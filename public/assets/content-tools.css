@@ -617,7 +617,7 @@ to {
 .ct-widget .ct-control--upload {
     overflow: hidden;
 }
-.ct-widget.ct-image-dialog--empty .ct-control--cancel, .ct-widget.ct-image-dialog--empty .ct-control--clear, .ct-widget.ct-image-dialog--empty .ct-control--crop, .ct-widget.ct-image-dialog--empty .ct-control--insert, .ct-widget.ct-image-dialog--empty .ct-control--rotate-ccw, .ct-widget.ct-image-dialog--empty .ct-control--rotate-cw, .ct-widget.ct-image-dialog--empty .ct-progress-bar, .ct-widget.ct-image-dialog--populated .ct-control--cancel, .ct-widget.ct-image-dialog--populated .ct-control--upload, .ct-widget.ct-image-dialog--populated .ct-progress-bar, .ct-widget.ct-image-dialog--uploading .ct-control--clear, .ct-widget.ct-image-dialog--uploading .ct-control--crop, .ct-widget.ct-image-dialog--uploading .ct-control--insert, .ct-widget.ct-image-dialog--uploading .ct-control--rotate-ccw, .ct-widget.ct-image-dialog--uploading .ct-control--rotate-cw, .ct-widget.ct-image-dialog--uploading .ct-control--upload {
+.ct-widget.ct-image-dialog--empty .ct-control--cancel, .ct-widget.ct-image-dialog--empty .ct-control--clear, .ct-widget.ct-image-dialog--empty .ct-control--crop, .ct-widget.ct-image-dialog--empty .ct-control--insert, .ct-widget.ct-image-dialog--empty .ct-control--rotate-ccw, .ct-widget.ct-image-dialog--empty .ct-control--rotate-cw, .ct-widget.ct-image-dialog--populated .ct-control--cancel, .ct-widget.ct-image-dialog--populated .ct-control--upload, .ct-widget.ct-image-dialog--populated .ct-progress-bar, .ct-widget.ct-image-dialog--uploading .ct-control--clear, .ct-widget.ct-image-dialog--uploading .ct-control--crop, .ct-widget.ct-image-dialog--uploading .ct-control--insert, .ct-widget.ct-image-dialog--uploading .ct-control--rotate-ccw, .ct-widget.ct-image-dialog--uploading .ct-control--rotate-cw, .ct-widget.ct-image-dialog--uploading .ct-control--upload {
     display: none;
 }
 .ct-widget .ct-image-dialog__view {
@@ -639,14 +639,16 @@ to {
 }
 .ct-widget .ct-image-dialog__view:empty:before {
     color: #fff;
-    content: '\e90d'}
+    content: '\e90d'
+}
 .ct-widget .ct-image-dialog__image {
     background-color: transparent;
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: contain;
     height: 100%;
-    width: 100%}
+    width: 100%
+}
 .ct-widget .ct-image-dialog__file-upload {
     cursor: pointer;
     font-size: 400px;
@@ -684,7 +686,8 @@ to {
     padding: 16px;
     outline: none;
     resize: none;
-    width: 100%}
+    width: 100%
+}
 .ct-widget .ct-properties-dialog__inner-html--invalid {
     color: #e74c3c;
 }
@@ -780,7 +783,8 @@ to {
 }
 .ct-widget .ct-anchored-dialog__button:before {
     color: #fff;
-    content: '\ea10'}
+    content: '\ea10'
+}
 .ct-widget .ct-anchored-dialog__button:hover {
     background: #2cc36b;
 }
@@ -1252,17 +1256,7 @@ to {
 }
 .ct-widget--active.ct-modal {
     height: 100%;
-    width: 100%}
-.ct-widget .ct-progress-bar {
-    border: 1px solid #eee;
-    height: 32px;
-    line-height: 32px;
-    padding: 1px;
-    width: 456px;
-}
-.ct-widget .ct-progress-bar__progress {
-    background: #2980b9;
-    height: 28px;
+    width: 100%
 }
 .ct-widget .ct-section {
     border-bottom: 1px solid #eee;

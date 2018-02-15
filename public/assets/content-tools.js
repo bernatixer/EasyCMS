@@ -6985,7 +6985,6 @@
       this._cropMarks = null;
       this._imageURL = null;
       this._imageSize = null;
-      //this._progress = 0;
       this._state = 'empty';
       if (ContentTools.IMAGE_UPLOADER) {
         ContentTools.IMAGE_UPLOADER(this);
@@ -7019,7 +7018,7 @@
     };
 
     ImageDialog.prototype.mount = function() {
-      var domActions, domProgressBar, domTools;
+      var domActions, domTools;
       ImageDialog.__super__.mount.call(this);
       ContentEdit.addCSSClass(this._domElement, 'ct-image-dialog');
       ContentEdit.addCSSClass(this._domElement, 'ct-image-dialog--empty');
@@ -7035,10 +7034,6 @@
       this._domCrop = this.constructor.createDiv(['ct-control', 'ct-control--icon', 'ct-control--crop']);
       this._domCrop.setAttribute('data-ct-tooltip', ContentEdit._('Crop marks'));
       domTools.appendChild(this._domCrop);
-      //domProgressBar = this.constructor.createDiv(['ct-progress-bar']);
-      //domTools.appendChild(domProgressBar);
-      //this._domProgress = this.constructor.createDiv(['ct-progress-bar__progress']);
-      //domProgressBar.appendChild(this._domProgress);
       domActions = this.constructor.createDiv(['ct-control-group', 'ct-control-group--right']);
       this._domControls.appendChild(domActions);
       this._domUpload = this.constructor.createDiv(['ct-control', 'ct-control--text', 'ct-control--upload']);
@@ -7053,9 +7048,6 @@
       this._domInsert = this.constructor.createDiv(['ct-control', 'ct-control--text', 'ct-control--insert']);
       this._domInsert.textContent = ContentEdit._('Insert');
       domActions.appendChild(this._domInsert);
-      //this._domCancelUpload = this.constructor.createDiv(['ct-control', 'ct-control--text', 'ct-control--cancel']);
-      //this._domCancelUpload.textContent = ContentEdit._('Cancel');
-      //domActions.appendChild(this._domCancelUpload);
       this._domClear = this.constructor.createDiv(['ct-control', 'ct-control--text', 'ct-control--clear']);
       this._domClear.textContent = ContentEdit._('Clear');
       domActions.appendChild(this._domClear);
@@ -7073,17 +7065,6 @@
       this._domImage.style['background-image'] = "url(" + imageURL + ")";
       return this.state('populated');
     };
-
-    /*ImageDialog.prototype.progress = function(progress) {
-      if (progress === void 0) {
-        return this._progress;
-      }
-      this._progress = progress;
-      if (!this.isMounted()) {
-        return;
-      }
-      return this._domProgress.style.width = "" + this._progress + "%";
-    };*/
 
     ImageDialog.prototype.removeCropMarks = function() {
       if (!this._cropMarks) {
@@ -7121,12 +7102,10 @@
 
     ImageDialog.prototype.unmount = function() {
       ImageDialog.__super__.unmount.call(this);
-      //this._domCancelUpload = null;
       this._domClear = null;
       this._domCrop = null;
       this._domInput = null;
       this._domInsert = null;
-      //this._domProgress = null;
       this._domRotateCCW = null;
       this._domRotateCW = null;
       this._domUpload = null;
@@ -7152,11 +7131,6 @@
           }));
         };
       })(this));
-      /*this._domCancelUpload.addEventListener('click', (function(_this) {
-        return function(ev) {
-          return _this.dispatchEvent(_this.createEvent('imageuploader.cancelupload'));
-        };
-      })(this));*/
       this._domClear.addEventListener('click', (function(_this) {
         return function(ev) {
           _this.removeCropMarks();

@@ -83,20 +83,16 @@ window.imageUploader = function(dialog){
     var image;
 
     dialog.addEventListener('imageuploader.clear', function () {
-        // Clear the current image
         dialog.clear();
         image = null;
 		$.get('/upload/cancel');
     });
 
     dialog.addEventListener('imageuploader.fileready', function (ev) {
-        // Upload a file to the server
         var formData;
         var file = ev.detail().file;
 
-        // Set the dialog state to uploading and reset the progress bar to 0
         dialog.state('uploading');
-        // dialog.progress(0);
 		// TO-DO: PUT A LOADING GIF
 
         // Build the form data to post to the server
@@ -122,14 +118,6 @@ window.imageUploader = function(dialog){
 
         // Set the dialog to busy while the rotate is performed
         dialog.busy(true);
-
-        // Build the form data to post to the server
-        formData = new FormData();
-        formData.append('url', image.url);
-
-        // Set the width of the image when it's inserted, this is a default
-        // the user will be able to resize the image afterwards.
-        formData.append('width', image.size[0]);
 
         // Check if a crop region has been defined by the user
         if (dialog.cropRegion()) {
