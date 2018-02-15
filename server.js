@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
 
 app.post('/upload', upload.single('image'), function (req, res) {
 	filePath = req.file.path;
-	res.send(JSON.stringify({url: filePath, size: req.file.size}));
+	res.send(JSON.stringify({url: req.file.filename, size: req.file.size}));
 });
 
 app.get('/upload/confirm', function (req, res) {

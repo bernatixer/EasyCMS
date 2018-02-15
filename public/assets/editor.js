@@ -109,7 +109,7 @@ window.imageUploader = function(dialog){
 			'success': function(data){
 				var response = JSON.parse(data);
 				image = response;
-				dialog.populate('http://localhost:3000/'+response.url, 600);
+				dialog.populate('http://localhost:3000/temp/'+response.url, [600, 600]);
 			}
 		});
     });
@@ -137,7 +137,7 @@ window.imageUploader = function(dialog){
 			dialog.busy(false);
 			dialog.save(
 				data,
-				600,
+				[600, 600],
 				{
 					'alt': "Change me!",
 					'data-ce-max-width': 600
