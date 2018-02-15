@@ -2,14 +2,28 @@
 
 const express = require('express');
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const pretty = require('pretty');
 const cloudinary = require('cloudinary');
 const multer = require('multer');
 const sizeOf = require('image-size');
+const path = require('path');
 
-var upload = multer({ dest: 'public/temp/' });
+var upload = multer({
+	dest: 'public/temp/',
+	fileFilter: function (req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+            return callback(new Error('Only images are allowed'))
+        }
+        callback(null, true)
+    },
+	limits: {fileSize: 5000000}
+});
+
 var filePath = '';
 
 cloudinary.config({ 
@@ -56,7 +70,10 @@ app.get('/upload/cancel', function (req, res) {
 });
 
 app.post('/save-my-page', function(req, res) {
-	var oldHTML = fs.readFileSync("views/index.ejs", "utf8");
+	var url = (req.body['__name__']).substring(1);
+	if (url === '') url = 'index';
+	delete req.body['__name__'];
+	var oldHTML = fs.readFileSync("views/"+url+".ejs", "utf8");
 	
 	require('jsdom/lib/old-api').env(oldHTML, [
 	  ['http://code.jquery.com/jquery-3.3.1.min.js']
@@ -70,10 +87,10 @@ app.post('/save-my-page', function(req, res) {
 		}
 		
 		var newHTML = pretty("<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", {ocd: true});
-		fs.writeFile("views/index.ejs", newHTML, function(err) {
+		fs.writeFile("views/"+url+".ejs", newHTML, function(err) {
 			if (err) {
 				res.send("error");
-				return console.log(err);
+				return console.log(err.stack);
 			}
 			res.send("ok");
 		});
@@ -81,9 +98,24 @@ app.post('/save-my-page', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-	res.render('404');
+	console.log(req.url);
+	if (fs.existsSync('views'+req.url+'.ejs')) {
+		res.render((req.url).substring(1));
+	} else {
+		res.render('404');
+	}
 });
 
-app.listen(3000, function() {
+io.on('connection', function(socket) {
+  socket.on('createTab', function(data) {
+    var blank = fs.readFileSync("views/blank.ejs", "utf8");
+	fs.writeFile("views/"+data.name+".ejs", blank, function(err) {
+		if (err) return console.log(err.stack);
+        socket.emit('tabCreated');
+	});
+  });
+});
+
+server.listen(3000, function() {
 	console.log('EasyCMS listening on port 3000!')
 });

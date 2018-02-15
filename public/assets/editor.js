@@ -29,7 +29,7 @@ window.addEventListener('load', function() {
         // Set the editor as busy while we save our changes
         this.busy(true);
 		
-        payload = {};
+        payload = {__name__: window.location.pathname};
         for (name in regions) {
             if (regions.hasOwnProperty(name)) {
 				payload[name] = regions[name];
