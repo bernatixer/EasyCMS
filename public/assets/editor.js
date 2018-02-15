@@ -112,7 +112,7 @@ window.imageUploader = function(dialog){
 			'success': function(data){
 				var response = JSON.parse(data);
 				image = response;
-				dialog.populate('http://localhost:3000/temp/'+response.url, [600, 600]);
+				dialog.populate('http://localhost:3000/temp/'+image.url, image.size);
 			}
 		});
     });
@@ -129,7 +129,7 @@ window.imageUploader = function(dialog){
 
         // Set the width of the image when it's inserted, this is a default
         // the user will be able to resize the image afterwards.
-        formData.append('width', 600);
+        formData.append('width', image.size[0]);
 
         // Check if a crop region has been defined by the user
         if (dialog.cropRegion()) {
@@ -140,10 +140,10 @@ window.imageUploader = function(dialog){
 			dialog.busy(false);
 			dialog.save(
 				data,
-				[600, 600],
+				image.size,
 				{
 					'alt': "Change me!",
-					'data-ce-max-width': 600
+					'data-ce-max-width': image.size[0]
 				}
 			);
 		});
