@@ -55,29 +55,39 @@ window.addEventListener('load', function() {
     }
 });
 
-window.onload = function(){
-    var customTools = document.querySelectorAll("[custom-tool]");
-    for (var elem of customTools)  {
-        elem.onmousedown = function(e){
-            
-            e = e || window.event
-            e.preventDefault();
-    
-            var element = ContentEdit.Root.get().focused();
-            var domElement = window.getSelection().anchorNode.parentElement;
-    
-            ContentSelect.Range.prepareElement(domElement);
-            selection = ContentSelect.Range.query(domElement);
+//Call to apply tool = toolToApply
+function applyTool(toolToApply){
+    var element = ContentEdit.Root.get().focused();
+    var domElement = window.getSelection().anchorNode.parentElement;
 
-            var useTool = this.getAttribute("custom-tool");
+    ContentSelect.Range.prepareElement(domElement);
+    selection = ContentSelect.Range.query(domElement);    
 
-            console.log(useTool + " tool click");
-
-            var tool = ContentTools.ToolShelf.fetch(useTool);
-            tool.apply(element,selection,function(){});
-        }
-    };
+    var tool = ContentTools.ToolShelf.fetch(toolToApply);
+    tool.apply(element,selection,function(){});
 }
+
+//Ctrl + z = undo, ctrl Y = redo
+$(document).keydown(function(e){
+    if( e.which === 90 && e.ctrlKey){
+       console.log('control + z'); 
+       applyTool("undo");
+    }
+    else if( e.which === 89 && e.ctrlKey ){
+       console.log('control + y'); 
+       applyTool("redo");
+    }          
+}); 
+
+//Set toolbar buttons function
+$('[custom-tool]').mousedown(function(e){
+    e = e || window.event
+    e.preventDefault();
+    
+    var useTool = this.getAttribute("custom-tool");
+    applyTool(useTool);
+});
+
 
 window.imageUploader = function(dialog){
     var image;
