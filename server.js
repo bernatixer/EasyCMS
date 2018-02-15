@@ -63,8 +63,7 @@ app.post('/save-my-page', function(req, res) {
 		var $ = window.$;
 		$(".jsdom").remove();
 		
-		console.log(req.body);
-		for (obj in req.body) {
+		for (var obj in req.body) {
 			$('div[data-name="'+obj+'"]').html(req.body[obj]);
 		}
 		
