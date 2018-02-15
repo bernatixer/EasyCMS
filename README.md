@@ -14,4 +14,5 @@ CMS made easy
  - Delete styles with toolbar
  - Justify text tool
  - Secure new tab, when saving file
- - [new Tools] -> Change text color, change background color, change Margin, Change Image effects 
+ - [new Tools] -> Change text color, change background color, change Margin, Change Image effects
+ - Image effects (http://camanjs.com/guides/#AdvancedUsage)
