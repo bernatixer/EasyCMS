@@ -10,3 +10,4 @@ CMS made easy
  - New button to remove styles of text
  - ~~Ctrl+Z should go Back, and Ctrl+Y forward~~
  - Make a function to ON/OFF editor
+ - Delete styles with toolbar
