@@ -75,3 +75,76 @@ window.onload = function(){
     };
 
 }
+
+window.imageUploader = function(dialog){
+    var image;
+
+    dialog.addEventListener('imageuploader.clear', function () {
+        // Clear the current image
+        dialog.clear();
+        image = null;
+		$.get('/upload/cancel');
+    });
+
+    dialog.addEventListener('imageuploader.fileready', function (ev) {
+        // Upload a file to the server
+        var formData;
+        var file = ev.detail().file;
+
+        // Set the dialog state to uploading and reset the progress bar to 0
+        dialog.state('uploading');
+        // dialog.progress(0);
+		// TO-DO: PUT A LOADING GIF
+
+        // Build the form data to post to the server
+        formData = new FormData();
+        formData.append('image', file);
+
+		$.ajax({
+			url: '/upload',
+			data: formData,
+			contentType: false,
+			processData: false,
+			type: 'POST',
+			'success': function(data){
+				var response = JSON.parse(data);
+				image = response;
+				dialog.populate('http://localhost:3000/'+response.url, 600);
+			}
+		});
+    });
+	
+    dialog.addEventListener('imageuploader.save', function () {
+        var crop, cropRegion, formData;
+
+        // Set the dialog to busy while the rotate is performed
+        dialog.busy(true);
+
+        // Build the form data to post to the server
+        formData = new FormData();
+        formData.append('url', image.url);
+
+        // Set the width of the image when it's inserted, this is a default
+        // the user will be able to resize the image afterwards.
+        formData.append('width', 600);
+
+        // Check if a crop region has been defined by the user
+        if (dialog.cropRegion()) {
+            formData.append('crop', dialog.cropRegion());
+        }
+
+		$.get('/upload/confirm', function(data) {
+			dialog.busy(false);
+			dialog.save(
+				data,
+				600,
+				{
+					'alt': "Change me!",
+					'data-ce-max-width': 600
+				}
+			);
+		});
+    });
+}
+
+ContentTools.IMAGE_UPLOADER = imageUploader;
