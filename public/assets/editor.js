@@ -56,10 +56,10 @@ window.addEventListener('load', function() {
 });
 
 window.onload = function(){
-    var customTools = document.getElementsByClassName("custom-tool");
+    var customTools = document.querySelectorAll("[custom-tool]");
     for (var elem of customTools)  {
         elem.onmousedown = function(e){
-
+            
             e = e || window.event
             e.preventDefault();
     
@@ -68,12 +68,15 @@ window.onload = function(){
     
             ContentSelect.Range.prepareElement(domElement);
             selection = ContentSelect.Range.query(domElement);
-            
-            var bold = ContentTools.ToolShelf.fetch(this.id);
-            bold.apply(element,selection,function(){});
+
+            var useTool = this.getAttribute("custom-tool");
+
+            console.log(useTool + " tool click");
+
+            var tool = ContentTools.ToolShelf.fetch(useTool);
+            tool.apply(element,selection,function(){});
         }
     };
-
 }
 
 window.imageUploader = function(dialog){
