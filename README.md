@@ -11,3 +11,4 @@ CMS made easy
  - ~~Ctrl+Z should go Back, and Ctrl+Y forward~~
  - Make a function to ON/OFF editor
  - Delete styles with toolbar
+ - [new Tools] -> Change text color, change background color, change Margin, Change Image effects 
