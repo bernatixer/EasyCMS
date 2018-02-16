@@ -12,7 +12,7 @@ CMS made easy
  - New button to remove styles of text
  - Make a function to ON/OFF editor
  - ~~Delete styles with toolbar~~
- - Justify text tool
+ - ~~Justify text tool~~
  - Secure new tab, when saving file
  - [new Tools] -> Change text color, change background color, change Margin, Change Image effects
  - Image effects (http://camanjs.com/guides/#AdvancedUsage)
