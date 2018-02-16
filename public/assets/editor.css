@@ -38,22 +38,7 @@
     font-variant: normal;
 }
 
-.toolbar [custom-tool].custom-bold:before{
-    content: "\ea62";
+.toolbar [custom-tool].custom-line-break:before{
+    content: "\ea6e";
 }
-.toolbar [custom-tool].custom-italic:before{
-    content: "\ea64";
-}
-.toolbar [custom-tool].custom-link:before{
-    content: "\e9cb";
-}
-.toolbar [custom-tool].custom-heading:before{
-    content: "H";
-    font-weight: 700;
-}
-.toolbar [custom-tool].custom-subheading:before{
-    content: "H";
-}
-.toolbar [custom-tool].custom-paragraph:before{
-    content: "P";
-}
+

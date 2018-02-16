@@ -1416,6 +1416,7 @@
     };
 
     Range.query = function(element) {
+      //console.log(element);
       var docRange, endNode, endOffset, range, startNode, startOffset, _ref;
       range = new ContentSelect.Range(0, 0);
       try {
