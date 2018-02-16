@@ -1657,8 +1657,8 @@
 
   ContentEdit = {
     ALIGNMENT_CLASS_NAMES: {
-      'left': 'align-left',
-      'right': 'align-right'
+      'left': 'has-text-left',
+      'right': 'has-text-right'
     },
     DEFAULT_MAX_ELEMENT_WIDTH: 800,
     DEFAULT_MIN_ELEMENT_WIDTH: 80,
@@ -5548,7 +5548,7 @@
   ContentTools = {
     Tools: {},
     CANCEL_MESSAGE: 'Your changes have not been saved, do you really want to lose them?'.trim(),
-    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right'], ['heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
+    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right', 'justify'], ['heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
     DEFAULT_VIDEO_HEIGHT: 300,
     DEFAULT_VIDEO_WIDTH: 400,
     HIGHLIGHT_HOLD_DURATION: 2000,
@@ -9641,7 +9641,7 @@
         detail = ev.detail();
         applied = true;
         if (element.type() === 'Image') {
-          alignmentClassNames = ['align-center', 'align-left', 'align-right'];
+          alignmentClassNames = ['has-text-centered', 'has-text-left', 'has-text-right'];
           if (detail.href) {
             element.a = {
               href: detail.href
@@ -9932,7 +9932,7 @@
       if ((_ref = element.type()) === 'ListItemText' || _ref === 'TableCellText') {
         element = element.parent();
       }
-      alignmentClassNames = [ContentTools.Tools.AlignLeft.className, ContentTools.Tools.AlignCenter.className, ContentTools.Tools.AlignRight.className];
+      alignmentClassNames = [ContentTools.Tools.AlignLeft.className, ContentTools.Tools.AlignCenter.className, ContentTools.Tools.AlignRight.className, ContentTools.Tools.Justify.className];
       for (_i = 0, _len = alignmentClassNames.length; _i < _len; _i++) {
         className = alignmentClassNames[_i];
         if (element.hasCSSClass(className)) {
@@ -9987,22 +9987,7 @@
 
     return AlignRight;
 
-  })(ContentTools.Tools.AlignLeft);
-
-  ContentTools.Tools.Justify = (function(_super){
-    __extends(Justify, _super);
-  
-    function Justify(){
-      return Justify.__super__.constructor.apply(this,arguments);
-    }
-
-    ContentTools.ToolShelf.stow(Justify, 'justify');
-
-    Justify.label = 'Justify';
-    Justify.icon = 'justify';
-    Justify.className = 'has-text-justified';
-
-  })(ContentTools.Tools.AlignLeft);
+  })(ContentTools.Tools.AlignLeft);  
 
   ContentTools.Tools.UnorderedList = (function(_super) {
     __extends(UnorderedList, _super);
@@ -10704,5 +10689,30 @@
     return Remove;
 
   })(ContentTools.Tool);
+
+  //----------------------------------------
+  //----------------------------------------
+  //----------------------------------------
+  //*************Custom Tools***************
+  //----------------------------------------
+  //----------------------------------------
+  //----------------------------------------
+  
+  ContentTools.Tools.Justify = (function(_super){
+    __extends(Justify, _super);
+  
+    function Justify(){
+      return Justify.__super__.constructor.apply(this,arguments);
+    }
+
+    ContentTools.ToolShelf.stow(Justify, 'justify');
+
+    Justify.label = 'Justify';
+    Justify.icon = 'justify';
+    Justify.className = 'has-text-justified';
+
+    return Justify;
+
+})(ContentTools.Tools.AlignLeft);
 
 }).call(this);
