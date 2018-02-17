@@ -1,21 +1,15 @@
-window.addEventListener('load', function() {
+function startEditor() {
+    console.log("Editor Start");
+
     var editor;
 
     editor = ContentTools.EditorApp.get();
     editor.init('*[data-editable]', 'data-name', null, false);
 
-    //Right Click
-    if (document.addEventListener) { // IE >= 9; other browsers
-        document.addEventListener('contextmenu', function(e) {
-            openToolbox();
-            e.preventDefault();
-        }, false);
-    } else { // IE < 9
-        document.attachEvent('oncontextmenu', function() {
-            openToolbox();
-            window.event.returnValue = false;
-        });
-    }
+    editor.start();
+    //editor.ignition().hide();
+    editor.inspector().hide();
+    editor.toolbox().hide();
 
     editor.addEventListener('saved', function (ev) {
         var name, payload, regions, xhr;
@@ -41,19 +35,39 @@ window.addEventListener('load', function() {
             if (data == "ok") new ContentTools.FlashUI('ok');
             else new ContentTools.FlashUI('no');
         });
+    });      
+    
+    //Set save Button
+    $("#saveButton").click(function(e){
+        editor.save(true);
     });
 
-    function openToolbox(){
-        
-        if(editor.isReady()){
-            editor.start();        
-            editor.inspector().hide();
-        }else if(editor.isEditing()){
-            editor.stop(true);
+    //Right Click prevent default    
+    $(document).contextmenu(function(e){
+        e.preventDefault();
+    })
+
+    //Ctrl + z = undo, ctrl Y = redo
+    $(document).keydown(function(e){
+        if( e.which === 90 && e.ctrlKey){
+        console.log('control + z'); 
+        applyTool("undo");
         }
-          
-    }
-});
+        else if( e.which === 89 && e.ctrlKey ){
+        console.log('control + y'); 
+        applyTool("redo");
+        }          
+    });
+
+    //Set toolbar buttons function
+    $('[custom-tool]').mousedown(function(e){
+        e = e || window.event
+        e.preventDefault();
+        
+        var useTool = this.getAttribute("custom-tool");
+        applyTool(useTool);
+    });
+};
 
 //Call to apply tool = toolToApply
 function applyTool(toolToApply){
@@ -65,29 +79,7 @@ function applyTool(toolToApply){
 
     var tool = ContentTools.ToolShelf.fetch(toolToApply);
     tool.apply(element,selection,function(){});
-}
-
-//Ctrl + z = undo, ctrl Y = redo
-$(document).keydown(function(e){
-    if( e.which === 90 && e.ctrlKey){
-       console.log('control + z'); 
-       applyTool("undo");
-    }
-    else if( e.which === 89 && e.ctrlKey ){
-       console.log('control + y'); 
-       applyTool("redo");
-    }          
-}); 
-
-//Set toolbar buttons function
-$('[custom-tool]').mousedown(function(e){
-    e = e || window.event
-    e.preventDefault();
-    
-    var useTool = this.getAttribute("custom-tool");
-    applyTool(useTool);
-});
-
+} 
 
 window.imageUploader = function(dialog){
     var image;
