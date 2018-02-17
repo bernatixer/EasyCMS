@@ -58,7 +58,7 @@ window.addEventListener('load', function() {
 //Call to apply tool = toolToApply
 function applyTool(toolToApply){
     var element = ContentEdit.Root.get().focused();
-    var domElement = element._domElement;
+    var domElement = element.domElement();
 
     ContentSelect.Range.prepareElement(domElement);
     selection = ContentSelect.Range.query(domElement);    

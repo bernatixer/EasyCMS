@@ -1657,8 +1657,8 @@
 
   ContentEdit = {
     ALIGNMENT_CLASS_NAMES: {
-      'left': 'has-text-left',
-      'right': 'has-text-right'
+      'left': 'align-left',
+      'right': 'align-right'
     },
     DEFAULT_MAX_ELEMENT_WIDTH: 800,
     DEFAULT_MIN_ELEMENT_WIDTH: 80,
@@ -9641,7 +9641,7 @@
         detail = ev.detail();
         applied = true;
         if (element.type() === 'Image') {
-          alignmentClassNames = ['has-text-centered', 'has-text-left', 'has-text-right'];
+          alignmentClassNames = ['align-center', 'align-left', 'align-right'];
           if (detail.href) {
             element.a = {
               href: detail.href
