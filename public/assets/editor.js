@@ -25,7 +25,7 @@ window.addEventListener('load', function() {
         if (Object.keys(regions).length == 0) {
             return;
         }
-    
+		
         // Set the editor as busy while we save our changes
         this.busy(true);
 		
@@ -124,15 +124,8 @@ window.imageUploader = function(dialog){
     });
 	
     dialog.addEventListener('imageuploader.save', function () {
-        var crop, cropRegion, formData;
-
         // Set the dialog to busy while the rotate is performed
         dialog.busy(true);
-
-        // Check if a crop region has been defined by the user
-        if (dialog.cropRegion()) {
-            formData.append('crop', dialog.cropRegion());
-        }
 
 		$.get('/upload/confirm', function(data) {
 			dialog.busy(false);

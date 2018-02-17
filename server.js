@@ -7,6 +7,7 @@ const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const pretty = require('pretty');
+const jsdom = require('jsdom/lib/old-api');
 const cloudinary = require('cloudinary');
 const multer = require('multer');
 const sizeOf = require('image-size');
@@ -25,6 +26,10 @@ var upload = multer({
 });
 
 var filePath = '';
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
 
 cloudinary.config({ 
   cloud_name: 'easycms', 
@@ -52,7 +57,7 @@ app.post('/upload', upload.single('image'), function (req, res) {
 });
 
 app.get('/upload/confirm', function (req, res) {
-	if (filePath !== '') {
+	if (filePath != '') {
 		cloudinary.uploader.upload(filePath, function(result) {
 			res.send(result.secure_url);
 			fs.unlink(filePath);
@@ -72,10 +77,11 @@ app.get('/upload/cancel', function (req, res) {
 app.post('/save-my-page', function(req, res) {
 	var url = (req.body['__name__']).substring(1);
 	if (url === '') url = 'index';
+	url = replaceAll(url, ' ', '%20');
 	delete req.body['__name__'];
 	var oldHTML = fs.readFileSync("views/"+url+".ejs", "utf8");
 	
-	require('jsdom/lib/old-api').env(oldHTML, [
+	jsdom.env(oldHTML, [
 	  ['http://code.jquery.com/jquery-3.3.1.min.js']
 	],
 	function(errors, window) {
@@ -98,7 +104,6 @@ app.post('/save-my-page', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-	console.log(req.url);
 	if (fs.existsSync('views'+req.url+'.ejs')) {
 		res.render((req.url).substring(1));
 	} else {
@@ -108,10 +113,25 @@ app.get('*', function(req, res) {
 
 io.on('connection', function(socket) {
   socket.on('createTab', function(data) {
-    var blank = fs.readFileSync("views/blank.ejs", "utf8");
-	fs.writeFile("views/"+data.name+".ejs", blank, function(err) {
-		if (err) return console.log(err.stack);
-        socket.emit('tabCreated');
+	  
+	var oldHTML = fs.readFileSync("views/index.ejs", "utf8");
+	
+	jsdom.env(oldHTML, [
+	  ['http://code.jquery.com/jquery-3.3.1.min.js']
+	],
+	function(errors, window) {
+		var $ = window.$;
+		$(".jsdom").remove();
+		
+		$('#navbarItem').append('<a class="navbar-item">'+data.name+'</a>');
+		
+		var newHTML = pretty("<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", {ocd: true});
+		fs.writeFile("views/"+data.name+".ejs", newHTML, function(err) {
+			if (err) {
+				return console.log(err.stack);
+			}
+			socket.emit('tabCreated');
+		});
 	});
   });
 });
