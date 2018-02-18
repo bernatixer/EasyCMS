@@ -21,6 +21,7 @@ function startEditor() {
         }
 		
         // Set the editor as busy while we save our changes
+		$("#savingPage").addClass("is-active");
         this.busy(true);
 		
         payload = {__name__: window.location.pathname};
@@ -31,6 +32,7 @@ function startEditor() {
         }
 
 		$.post( "/save-my-page", payload, function( data ) {
+			$("#savingPage").removeClass("is-active");
             editor.busy(false);
             if (data == "ok") new ContentTools.FlashUI('ok');
             else new ContentTools.FlashUI('no');

@@ -6,7 +6,6 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const pretty = require('pretty');
 const jsdom = require('jsdom/lib/old-api');
 const cloudinary = require('cloudinary');
 const multer = require('multer');
@@ -92,8 +91,7 @@ app.post('/save-my-page', function(req, res) {
 			$('div[data-name="'+obj+'"]').html(req.body[obj]);
 		}
 		
-		var newHTML = pretty("<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", {ocd: true});
-		fs.writeFile("views/"+url+".ejs", newHTML, function(err) {
+		fs.writeFile("views/"+url+".ejs", "<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", function(err) {
 			if (err) {
 				res.send("error");
 				return console.log(err.stack);
@@ -114,9 +112,9 @@ app.get('*', function(req, res) {
 io.on('connection', function(socket) {
   socket.on('createTab', function(data) {
 	  
-	var oldHTML = fs.readFileSync("views/index.ejs", "utf8");
+	var blank = fs.readFileSync("views/include/blank.ejs", "utf8");
 	
-	jsdom.env(oldHTML, [
+	jsdom.env(blank, [
 	  ['http://code.jquery.com/jquery-3.3.1.min.js']
 	],
 	function(errors, window) {
@@ -125,8 +123,7 @@ io.on('connection', function(socket) {
 		
 		$('#navbarItem').append('<a class="navbar-item">'+data.name+'</a>');
 		
-		var newHTML = pretty("<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", {ocd: true});
-		fs.writeFile("views/"+data.name+".ejs", newHTML, function(err) {
+		fs.writeFile("views/"+data.name+".ejs", "<!DOCTYPE html>\n<html>\n" + $("html").html() + "\n</html>", function(err) {
 			if (err) {
 				return console.log(err.stack);
 			}

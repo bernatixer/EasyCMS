@@ -16,3 +16,6 @@ CMS made easy
  - Secure new tab, when saving file
  - [new Tools] -> Change text color, change background color, change Margin, Change Image effects
  - Image effects (http://camanjs.com/guides/#AdvancedUsage)
+ - Remove resize and crop when uploading image
+ - Center loading gif when saving
+ - Make Tabs to import HEADER, FOOTER and NAVBAR. Also use pretty again.
