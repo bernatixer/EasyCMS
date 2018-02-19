@@ -12,10 +12,10 @@ CMS made easy
  - Control Multer errors (File too large, bad extension)
  - Error control at AJAX when uploading photos
  - New button to remove styles of text
- - Make a function to ON/OFF editor
+ - ~~Make a function to ON/OFF editor~~
  - Secure new tab, when saving file
- - [new Tools] -> Change text color, change background color, change Margin, Change Image effects
+ - [new Tools] -> Change text color, change background color, change Margin, Change Image effects, Add map, Add twitter/facebook timeline
  - Image effects (http://camanjs.com/guides/#AdvancedUsage)
  - Remove resize and crop when uploading image
- - Center loading gif when saving
+ - ~~Center loading gif when saving~~
  - Make Tabs to import HEADER, FOOTER and NAVBAR. Also use pretty again.

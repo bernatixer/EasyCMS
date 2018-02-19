@@ -11,64 +11,73 @@ function startEditor() {
     editor.inspector().hide();
     editor.toolbox().hide();
 
-    editor.addEventListener('saved', function (ev) {
-        var name, payload, regions, xhr;
-    
-        // Check that something changed
-        regions = ev.detail().regions;
-        if (Object.keys(regions).length == 0) {
-            return;
-        }
-		
-        // Set the editor as busy while we save our changes
-		$("#savingPage").addClass("is-active");
-        this.busy(true);
-		
-        payload = {__name__: window.location.pathname};
-        for (name in regions) {
-            if (regions.hasOwnProperty(name)) {
-				payload[name] = regions[name];
-            }
-        }
-
-		$.post( "/save-my-page", payload, function( data ) {
-			$("#savingPage").removeClass("is-active");
-            editor.busy(false);
-            if (data == "ok") new ContentTools.FlashUI('ok');
-            else new ContentTools.FlashUI('no');
-        });
-    });      
-    
-    //Set save Button
-    $("#saveButton").click(function(e){
-        editor.save(true);
+    //Render adminNavbar    
+    $.get("/include/admin-navbar",function(data){
+        $('#admin-navbar').append(data);
     });
 
-    //Right Click prevent default    
-    $(document).contextmenu(function(e){
-        e.preventDefault();
-    })
-
-    //Ctrl + z = undo, ctrl Y = redo
-    $(document).keydown(function(e){
-        if( e.which === 90 && e.ctrlKey){
-        console.log('control + z'); 
-        applyTool("undo");
-        }
-        else if( e.which === 89 && e.ctrlKey ){
-        console.log('control + y'); 
-        applyTool("redo");
-        }          
-    });
-
-    //Set toolbar buttons function
-    $('[custom-tool]').mousedown(function(e){
-        e = e || window.event
-        e.preventDefault();
+    $('#admin-navbar').ready(function(){
+        editor.addEventListener('saved', function (ev) {
+            var name, payload, regions, xhr;
         
-        var useTool = this.getAttribute("custom-tool");
-        applyTool(useTool);
-    });
+            // Check that something changed
+            regions = ev.detail().regions;
+            if (Object.keys(regions).length == 0) {
+                return;
+            }
+            
+            // Set the editor as busy while we save our changes
+            $("#savingPage").addClass("is-active");
+            this.busy(true);
+            
+            payload = {__name__: window.location.pathname};
+            for (name in regions) {
+                if (regions.hasOwnProperty(name)) {
+                    payload[name] = regions[name];
+                }
+            }
+    
+            $.post( "/save-my-page", payload, function( data ) {
+                $("#savingPage").removeClass("is-active");
+                editor.busy(false);
+                if (data == "ok") new ContentTools.FlashUI('ok');
+                else new ContentTools.FlashUI('no');
+            });
+        });      
+        
+        console.log($('saveButton'));
+    
+        //Set save Button
+        $('#saveButton').click(function(e){
+            editor.save(true);
+        });
+    
+        //Right Click prevent default    
+        $(document).contextmenu(function(e){
+            e.preventDefault();
+        })
+    
+        //Ctrl + z = undo, ctrl Y = redo
+        $(document).keydown(function(e){
+            if( e.which === 90 && e.ctrlKey){
+            console.log('control + z'); 
+            applyTool("undo");
+            }
+            else if( e.which === 89 && e.ctrlKey ){
+            console.log('control + y'); 
+            applyTool("redo");
+            }          
+        });
+    
+        //Set toolbar buttons function
+        $('[custom-tool]').mousedown(function(e){
+            e = e || window.event
+            e.preventDefault();
+            
+            var useTool = this.getAttribute("custom-tool");
+            applyTool(useTool);
+        });
+    });    
 };
 
 //Call to apply tool = toolToApply
