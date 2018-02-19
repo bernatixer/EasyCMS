@@ -17,6 +17,7 @@ function startEditor() {
     });
 
     $('#admin-navbar').ready(function(){
+
         editor.addEventListener('saved', function (ev) {
             var name, payload, regions, xhr;
         
@@ -77,6 +78,36 @@ function startEditor() {
             var useTool = this.getAttribute("custom-tool");
             applyTool(useTool);
         });
+
+        //---------New Tab--------------
+        //Opens modal 
+        $("#newTab").click(function() {
+            $("#newTabModal").addClass("is-active");
+        });
+        
+        //Close modal 
+        $(".modal-close").click(function() {
+            $("#newTabModal").removeClass("is-active");
+        });
+        
+        //Close modal
+        $(".modal-background").click(function() {
+            $("#newTabModal").removeClass("is-active");
+        });
+        
+        //Close Modal 
+        $(".modal-cancel").click(function() {
+            $("#newTabModal").removeClass("is-active");
+        });
+        
+        //Create Tab
+        $("#createTab").click(function() {
+            $("#newTabModal").removeClass("is-active");
+            socket.emit('createTab', {
+                name: $('#tabName').val()
+            });
+        });
+        //------------------------------
     });    
 };
 
