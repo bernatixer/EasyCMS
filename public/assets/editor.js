@@ -12,7 +12,7 @@ function startEditor() {
     editor.toolbox().hide();
 
     //Render adminNavbar    
-    $.get("/include/admin-navbar",function(data){
+    $.get("admin-navbar",function(data){
         $('#admin-navbar').append(data);
     });
 

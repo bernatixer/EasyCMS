@@ -42,3 +42,30 @@
     content: "\ea6e";
 }
 
+html, body {
+	font-family: 'Work Sans', sans-serif;
+}
+#toolbar {
+	background-color: #00BCD4;
+}
+#navbar {
+	background-color: #00BCD4;
+}
+.sep1 {
+	border-left: 1px solid #424242;
+}
+.sep2 {
+	border-left: 5px solid #424242;
+}
+.publish {
+	background-color: #F44336;
+	color: #FFFFFF;
+}
+.newTab {
+	background-color: #4CAF50;
+	color: #FFFFFF;
+}
+.save {
+	background-color: #FFC107;
+	color: #FFFFFF;
+}
