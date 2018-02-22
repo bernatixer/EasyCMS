@@ -19,3 +19,4 @@ CMS made easy
  - Remove resize and crop when uploading image
  - ~~Center loading gif when saving~~
  - Make Tabs to import HEADER, FOOTER and NAVBAR. Also use pretty again.
+ - Make admin navbar move with scroll
