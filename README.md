@@ -13,9 +13,12 @@ CMS made easy
  - Error control at AJAX when uploading photos
  - ~~Make a function to ON/OFF editor~~
  - Secure new tab, when saving file
- - [new Tools] -> Change text color, change background color, change Margin, Change Image effects, Add map, Add twitter/facebook timeline, Remove Style
+ - [new Tools] -> Change text color, change background color, change Margin, Change Image effects, Add map, Add twitter/facebook timeline, Remove Style, Carrousel, Calendar
  - Image effects (http://camanjs.com/guides/#AdvancedUsage)
  - Remove resize and crop when uploading image
  - ~~Center loading gif when saving~~
  - Make Tabs to import HEADER, FOOTER and NAVBAR. Also use pretty again.
  - ~~Make admin navbar move with scroll~~
+ - Make mobile dropdown (Hamburguer menu)
+ - Let the user choose from fixed navbar or not
+
