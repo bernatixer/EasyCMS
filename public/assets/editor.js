@@ -14,6 +14,7 @@ function startEditor() {
     //Render adminNavbar    
     $.get("admin-navbar",function(data){
         $('#admin-navbar').append(data);
+        $('body').addClass("has-navbar-fixed-top");
     });
 
     $('#admin-navbar').ready(function(){

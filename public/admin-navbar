@@ -1,4 +1,4 @@
-<nav class="navbar" id="toolbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top" id="toolbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item publish">
         <strong>PUBLISH</strong>
