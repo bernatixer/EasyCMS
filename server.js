@@ -17,7 +17,7 @@ var db;
 const DBurl = 'mongodb://localhost:27017';
 const DBname = 'easycms';
 
-const blank = fs.readFileSync("views/include/blank.ejs", "utf8");
+const blank = fs.readFileSync("include/blank.ejs", "utf8");
 
 var upload = multer({
 	dest: 'public/temp/',
@@ -90,7 +90,7 @@ app.get('/', function(req, res) {
 				});
 			});
 		} else {
-			res.render('404');
+			res.sendFile('404');
 		}
 	});
 });
@@ -155,7 +155,7 @@ app.get('*', function(req, res) {
 				});
 			});
 		} else {
-			res.render('404');
+			res.sendFile('404');
 		}
 	});
 });
