@@ -81,7 +81,18 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
-	res.render('index');
+	findTab('home', function(err, body) {
+		if (!err && body) {
+			getWebInfo("footer", function(err, footer) {
+				getWebInfo("head", function(err, head) {
+					var website = '<!DOCTYPE html>\n<html>\n<head>\n' + head.html + '</head>\n<body>\n<section class="hero is-fullheight is-default is-bold">' + body.html + '\n</section>\n' + footer.html +'\n</body>\n</html>';
+					res.send(website);
+				});
+			});
+		} else {
+			res.render('404');
+		}
+	});
 });
 
 app.post('/upload', upload.single('image'), function (req, res) {
@@ -110,7 +121,7 @@ app.get('/upload/cancel', function (req, res) {
 
 app.post('/save-my-page', function(req, res) {
 	var url = (req.body['__name__']).substring(1);
-	if (url === '') url = 'index';
+	if (url === '') url = 'home';
 	url = replaceAll(url, ' ', '%20');
 	delete req.body['__name__'];
 
