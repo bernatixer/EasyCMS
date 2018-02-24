@@ -10,9 +10,9 @@ function startEditor() {
     editor.inspector().hide();
     //editor.toolbox().hide();
 
-    //Render adminNavbar    
-    $.get("admin-navbar",function(data){
-        $('#admin-navbar').append(data);
+    //Render adminNavbar
+    $.get("admin-navbar", function(data) {
+        $('#navbarContent').prepend(data);
         $('body').addClass("has-navbar-fixed-top");
     });
 

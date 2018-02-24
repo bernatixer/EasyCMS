@@ -2,9 +2,42 @@
 <html>
 <head>
 __HEAD__
+	<style type="text/css">
+	  html,
+	  body {
+		font-family: 'Work Sans', sans-serif;
+	  }
+	  #toolbar {
+		background-color: #00BCD4;
+	  }
+	  #navbar {
+		background-color: #00BCD4;
+	  }
+	  .sep1 {
+		border-left: 1px solid #424242;
+	  }
+	  .sep2 {
+		border-left: 5px solid #424242;
+	  }
+	  .publish {
+		background-color: #F44336;
+		color: #FFFFFF;
+	  }
+	  .newTab {
+		background-color: #4CAF50;
+		color: #FFFFFF;
+	  }
+	  .save {
+		background-color: #FFC107;
+		color: #FFFFFF;
+	  }
+	</style>
 </head>
   <body>
-    <section class="hero is-fullheight is-default is-bold">
+	<section id="navbarContent">
+    __NAVBAR__
+	</section>
+    <section class="hero is-fullheight is-default is-bold" id="tabContent">
 	__SECTION__
     </section>
 	__FOOTER__
