@@ -11,13 +11,15 @@ const cloudinary = require('cloudinary');
 const multer = require('multer');
 const sizeOf = require('image-size');
 const path = require('path');
+const pretty = require('pretty');
 const MongoClient = require('mongodb').MongoClient;
 
 var db;
 const DBurl = 'mongodb://localhost:27017';
 const DBname = 'easycms';
 
-const blank = fs.readFileSync("include/blank.ejs", "utf8");
+const blank = fs.readFileSync("include/blank.html", "utf8");
+const template = fs.readFileSync("include/template.html", "utf8");
 
 var upload = multer({
 	dest: 'public/temp/',
@@ -71,29 +73,12 @@ cloudinary.config({
   api_secret: 'EPY2WeRXUwzaXpAEOK8VzuImiv0' 
 });
 
-app.set('view engine', 'ejs');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
 app.use(express.static('public'));
-
-app.get('/', function(req, res) {
-	findTab('home', function(err, body) {
-		if (!err && body) {
-			getWebInfo("footer", function(err, footer) {
-				getWebInfo("head", function(err, head) {
-					var website = '<!DOCTYPE html>\n<html>\n<head>\n' + head.html + '</head>\n<body>\n<section class="hero is-fullheight is-default is-bold">' + body.html + '\n</section>\n' + footer.html +'\n</body>\n</html>';
-					res.send(website);
-				});
-			});
-		} else {
-			res.sendFile('404');
-		}
-	});
-});
 
 app.post('/upload', upload.single('image'), function (req, res) {
 	filePath = req.file.path;
@@ -146,16 +131,22 @@ app.post('/save-my-page', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-	findTab((req.url).substring(1), function(err, body) {
+	var url = (req.url).substring(1);
+	if (url === '') url = 'home';
+	findTab(url, function(err, body) {
 		if (!err && body) {
 			getWebInfo("footer", function(err, footer) {
 				getWebInfo("head", function(err, head) {
-					var website = '<!DOCTYPE html>\n<html>\n<head>\n' + head.html + '</head>\n<body>\n<section class="hero is-fullheight is-default is-bold">' + body.html + '\n</section>\n' + footer.html +'\n</body>\n</html>';
-					res.send(website);
+					var tab = template;
+					tab = tab.replace('__HEAD__', head.html);
+					tab = tab.replace('__SECTION__', body.html);
+					tab = tab.replace('__FOOTER__', footer.html);
+					tab = pretty(tab);
+					res.send(tab);
 				});
 			});
 		} else {
-			res.sendFile('404');
+			res.sendFile(path.join(__dirname, '/public', '404.html'));
 		}
 	});
 });

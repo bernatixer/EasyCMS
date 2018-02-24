@@ -19,7 +19,7 @@ function startEditor() {
     $('#admin-navbar').ready(function(){
 
         editor.addEventListener('saved', function (ev) {
-            var name, payload, regions, xhr;
+            var name, payload, regions;
         
             // Check that something changed
             regions = ev.detail().regions;
