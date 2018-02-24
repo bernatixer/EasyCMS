@@ -7,9 +7,8 @@ function startEditor() {
     editor.init('*[data-editable]', 'data-name', null, false);
 
     editor.start();
-    //editor.ignition().hide();
     editor.inspector().hide();
-    editor.toolbox().hide();
+    //editor.toolbox().hide();
 
     //Render adminNavbar    
     $.get("admin-navbar",function(data){
@@ -46,9 +45,7 @@ function startEditor() {
                 else new ContentTools.FlashUI('no');
             });
         });      
-        
-        console.log($('saveButton'));
-    
+            
         //Set save Button
         $('#saveButton').click(function(e){
             editor.save(true);
@@ -109,20 +106,44 @@ function startEditor() {
             });
         });
         //------------------------------
-    });    
+    });  
+
+    //Get element Selected (not Dom)
+    function getElementToApply(){
+        return ContentEdit.Root.get().focused();
+    }
+
+    //Get Range of selection
+    function getSelectionToApply(element){
+        var domElement = element.domElement();
+        ContentSelect.Range.prepareElement(domElement);
+        return ContentSelect.Range.query(domElement);
+    }
+
+    //Call to apply tool = toolToApply
+    function applyTool(toolToApply){
+        var element = getElementToApply();
+        var selection = getSelectionToApply(element);    
+
+        var tool = ContentTools.ToolShelf.fetch(toolToApply);
+        tool.apply(element,selection,function(){});
+    }
+
+    //Change Tool State depending if can be applied, its applied or not
+    function changeToolState(toolToApply,element,selection){
+        var tool = ContentTools.ToolShelf.fetch(toolToApply);
+        if(!tool.canApply(element,selection)){
+            element.domElement().style.display="none";
+        }else if(tool.isApplied(element,selection)){
+            element.domElement().classList.add("custom-applied");
+        }else{
+            element.domElement().classList.remove("custom-applied");
+        }
+    }    
+    
 };
 
-//Call to apply tool = toolToApply
-function applyTool(toolToApply){
-    var element = ContentEdit.Root.get().focused();
-    var domElement = element.domElement();
 
-    ContentSelect.Range.prepareElement(domElement);
-    selection = ContentSelect.Range.query(domElement);    
-
-    var tool = ContentTools.ToolShelf.fetch(toolToApply);
-    tool.apply(element,selection,function(){});
-} 
 
 window.imageUploader = function(dialog){
     var image;

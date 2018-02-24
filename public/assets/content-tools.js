@@ -1416,7 +1416,6 @@
     };
 
     Range.query = function(element) {
-      //console.log(element);
       var docRange, endNode, endOffset, range, startNode, startOffset, _ref;
       range = new ContentSelect.Range(0, 0);
       try {
@@ -6521,7 +6520,7 @@
         };
       })(this);
       window.addEventListener('resize', this._handleResize);
-      this._updateTools = (function(_this) {
+      this._updateTools = (function(_this) {        
         return function() {
           var app, element, name, selection, toolUI, update, _ref, _results;
           app = ContentTools.EditorApp.get();
@@ -6565,6 +6564,7 @@
           }
         };
       })(this);
+
       this._updateToolsInterval = setInterval(this._updateTools, 100);
       this._handleKeyDown = (function(_this) {
         return function(ev) {
