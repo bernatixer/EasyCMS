@@ -1,6 +1,7 @@
 function startEditor() {
 
     var editor;
+    // ALLTOOLS = ['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right', 'align-justify','heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break','image', 'video', 'preformatted','undo', 'redo', 'remove'];
     const TOOLS = ['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right', 'align-justify','heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break','image', 'video', 'preformatted','undo', 'redo', 'remove'];
     editor = ContentTools.EditorApp.get();
     editor.init('*[data-editable]', 'data-name', null, false);
@@ -27,7 +28,52 @@ function startEditor() {
     }); 
 
     $('#admin-navbar').ready(function(){
+        //SetInterval for update Tools
+        this._updateTools = (function(_this) {   
+            return function() {           
+                var element,  selection, update, _results;
+                update = false;
+                element = ContentEdit.Root.get().focused();
+                selection = null;
+                if (element == _this._lastUpdateElement) {
+                    if (element && element.selection) {
+                        selection = element.selection();
+                        if (_this._lastUpdateSelection) {
+                            if (!selection.eq(_this._lastUpdateSelection)) {
+                            update = true;
+                            }
+                        } else {
+                            update = true;
+                        }
+                    }
+                } else {
+                    update = true;
+                }
+                if (editor.history) {
+                    if (_this._lastUpdateHistoryLength !== editor.history.length()) {
+                        update = true;
+                    }
+                    _this._lastUpdateHistoryLength = editor.history.length();
+                    if (_this._lastUpdateHistoryIndex !== editor.history.index()) {
+                        update = true;
+                    }
+                    _this._lastUpdateHistoryIndex = editor.history.index();
+                }
+                _this._lastUpdateElement = element;
+                _this._lastUpdateSelection = selection;
 
+                if (update) {
+                    _results = [];
+                    TOOLS.forEach(elem => {
+                        _results.push(changeToolState(elem,element,selection));
+                    });               
+                    return _results;
+                }
+            };
+        })(this);
+        this._updateToolsInterval = setInterval(this._updateTools, 100);
+
+        //Save Event
         editor.addEventListener('saved', function (ev) {
             var name, payload, regions;
         
@@ -142,15 +188,25 @@ function startEditor() {
     //Change Tool State depending if can be applied, its applied or not
     function changeToolState(toolToApply,element,selection){
         var tool = ContentTools.ToolShelf.fetch(toolToApply);
-        if(!tool.canApply(element,selection)){
-            element.domElement().style.display="none";
-        }else if(tool.isApplied(element,selection)){
-            element.domElement().classList.add("custom-applied");
-        }else{
-            element.domElement().classList.remove("custom-applied");
+        var attr = '[custom-tool='+toolToApply+']';
+        if (tool.requiresElement) {
+            if (!(element && element.isMounted())) {
+                return $(attr).css({"display":"none"});
+            }
         }
-    }    
-    
+
+        if(tool.canApply(element,selection)){
+            $(attr).css({"display":"block"});
+        }else{
+            return  $(attr).css({"display":"none"});
+        }
+        
+        if(tool.isApplied(element,selection)){
+            return $(attr).addClass("custom-applied");
+        }else{
+            return $(attr).removeClass("custom-applied");
+        }
+    }        
 };
 
 

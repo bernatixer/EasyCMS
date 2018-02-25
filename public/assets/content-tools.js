@@ -6564,7 +6564,6 @@
           }
         };
       })(this);
-
       this._updateToolsInterval = setInterval(this._updateTools, 100);
       this._handleKeyDown = (function(_this) {
         return function(ev) {
