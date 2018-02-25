@@ -5547,7 +5547,7 @@
   ContentTools = {
     Tools: {},
     CANCEL_MESSAGE: 'Your changes have not been saved, do you really want to lose them?'.trim(),
-    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right', 'justify'], ['heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
+    DEFAULT_TOOLS: [['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right', 'align-justify'], ['heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break'], ['image', 'video', 'preformatted'], ['undo', 'redo', 'remove']],
     DEFAULT_VIDEO_HEIGHT: 300,
     DEFAULT_VIDEO_WIDTH: 400,
     HIGHLIGHT_HOLD_DURATION: 2000,
@@ -9932,7 +9932,7 @@
       if ((_ref = element.type()) === 'ListItemText' || _ref === 'TableCellText') {
         element = element.parent();
       }
-      alignmentClassNames = [ContentTools.Tools.AlignLeft.className, ContentTools.Tools.AlignCenter.className, ContentTools.Tools.AlignRight.className, ContentTools.Tools.Justify.className];
+      alignmentClassNames = [ContentTools.Tools.AlignLeft.className, ContentTools.Tools.AlignCenter.className, ContentTools.Tools.AlignRight.className, ContentTools.Tools.AlignJustify.className];
       for (_i = 0, _len = alignmentClassNames.length; _i < _len; _i++) {
         className = alignmentClassNames[_i];
         if (element.hasCSSClass(className)) {
@@ -10698,20 +10698,20 @@
   //----------------------------------------
   //----------------------------------------
   
-  ContentTools.Tools.Justify = (function(_super){
-    __extends(Justify, _super);
+  ContentTools.Tools.AlignJustify = (function(_super){
+    __extends(AlignJustify, _super);
   
-    function Justify(){
-      return Justify.__super__.constructor.apply(this,arguments);
+    function AlignJustify(){
+      return AlignJustify.__super__.constructor.apply(this,arguments);
     }
 
-    ContentTools.ToolShelf.stow(Justify, 'justify');
+    ContentTools.ToolShelf.stow(AlignJustify, 'align-justify');
 
-    Justify.label = 'Justify';
-    Justify.icon = 'justify';
-    Justify.className = 'has-text-justified';
+    AlignJustify.label = 'Align Justify';
+    AlignJustify.icon = 'align-justify';
+    AlignJustify.className = 'has-text-justified';
 
-    return Justify;
+    return AlignJustify;
 
 })(ContentTools.Tools.AlignLeft);
 

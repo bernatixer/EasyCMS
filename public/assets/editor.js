@@ -1,8 +1,7 @@
 function startEditor() {
-    console.log("Editor Start");
 
     var editor;
-
+    const TOOLS = ['bold', 'italic', 'link', 'align-left', 'align-center', 'align-right', 'align-justify','heading', 'subheading', 'paragraph', 'unordered-list', 'ordered-list', 'table', 'indent', 'unindent', 'line-break','image', 'video', 'preformatted','undo', 'redo', 'remove'];
     editor = ContentTools.EditorApp.get();
     editor.init('*[data-editable]', 'data-name', null, false);
 
@@ -10,11 +9,22 @@ function startEditor() {
     editor.inspector().hide();
     //editor.toolbox().hide();
 
-    //Render adminNavbar
-    $.get("admin-navbar", function(data) {
-        $('#navbarContent').prepend(data);
-        $('body').addClass("has-navbar-fixed-top");
-    });
+    $('#navbarContent').prepend(adminNavbar.getBaseHtml);
+    $('body').addClass("has-navbar-fixed-top");
+    var toolsCollection = adminNavbar.tools;
+    TOOLS.forEach(elem => {
+        var elemReplaced = elem.replace(/-/g, "_");
+        if(toolsCollection[elemReplaced]){
+            var tool = $('<a custom-tool="'+elem+'" class="navbar-item custom-'+elem+'"></a>')
+            $(toolsCollection.holderClass).append(tool);
+            var icon = toolsCollection[elemReplaced]["fa"];
+            if(icon) tool.append(icon);
+            else{
+                icon = toolsCollection[elemReplaced]["contentIcon"];
+                if(icon) tool.css({"content": icon});
+            }
+        }
+    }); 
 
     $('#admin-navbar').ready(function(){
 

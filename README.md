@@ -11,7 +11,7 @@ CMS made easy
  - ~~Justify text tool~~
  - ~~Make admin navbar move with scroll~~
  - ~~Make a function to ON/OFF editor~~
- - ~~Center loading gif when saving~~
+ - Center loading gif when saving
  - Control Multer errors (File too large, bad extension)
  - Error control at AJAX when uploading photos
  - Secure new tab, when saving file
