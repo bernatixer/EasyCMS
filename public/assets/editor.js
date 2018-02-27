@@ -264,3 +264,13 @@ window.imageUploader = function(dialog){
 }
 
 ContentTools.IMAGE_UPLOADER = imageUploader;
+
+$('#tabName').keypress(function (e) {
+  if (e.which == 13) {
+	$("#newTabModal").removeClass("is-active");
+	socket.emit('createTab', {
+		name: $('#tabName').val()
+	});
+    return false;
+  }
+});
