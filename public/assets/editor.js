@@ -182,7 +182,14 @@ function startEditor() {
         var selection = getSelectionToApply(element);    
 
         var tool = ContentTools.ToolShelf.fetch(toolToApply);
-        tool.apply(element,selection,function(){});
+        if(tool.canApply(element,selection)){
+            if(tool.isApplied(element,selection)){
+                appliedTool(toolToApply,false);
+            }else{
+                appliedTool(toolToApply,true);
+            }            
+            tool.apply(element,selection,function(){});
+        }
     }
 
     //Change Tool State depending if can be applied, its applied or not
@@ -191,22 +198,41 @@ function startEditor() {
         var attr = '[custom-tool='+toolToApply+']';
         if (tool.requiresElement) {
             if (!(element && element.isMounted())) {
-                return $(attr).css({"display":"none"});
+                return disableTool(toolToApply,true);
             }
         }
 
         if(tool.canApply(element,selection)){
-            $(attr).css({"display":"block"});
+            disableTool(toolToApply,false);
         }else{
-            return  $(attr).css({"display":"none"});
+            return  disableTool(toolToApply,true);
         }
         
         if(tool.isApplied(element,selection)){
+            return appliedTool(toolToApply,true);
+        }else{
+            return appliedTool(toolToApply,false);
+        }
+    }  
+    
+    function disableTool(toolToApply,disable){
+        var attr = '[custom-tool='+toolToApply+']';
+        if(disable){
+            appliedTool(toolToApply,false);
+            return  $(attr).addClass("not-active");
+        }else{
+            return $(attr).removeClass("not-active");
+        }
+    }
+
+    function appliedTool(toolToApply,applied){
+        var attr = '[custom-tool='+toolToApply+']';
+        if(applied){
             return $(attr).addClass("custom-applied");
         }else{
             return $(attr).removeClass("custom-applied");
         }
-    }        
+    }
 };
 
 
